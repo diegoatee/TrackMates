@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Club Edit</title>
+</head>
+<body class="d-flex flex-column">
+<main class="flex-shrink-0">
+  <!-- Page Content-->
+  <section layout:fragment="body" class="py-5">
+    <div class="container">
+      <!--Note: We keep the method as "post"-->
+      <form role="form" method="post" th:action="@{/clubs/{clubId}/edit(clubId=${club.id})}" th:object="${club}">
+        <input type="hidden" th:field="*{id}"> <!--We want the id to be passed into the JSON object, so a generated value won't be assigned, which would create a new Club-->
+        <input type="hidden" th:field="*{createdOn}"> <!--We also don't want to lose our creation data. Update time would still be consistent, but we need to keep this field.-->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="title">Title</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    th:field="*{title}"
+                    name="title"
+                    placeholder="Title">
+            <!--Here, th:if checks for errors, th:errors will print the error message for a given field if errors occurred, and class can determine the type of text-->
+            <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="photoURL">Photo URL</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="photoURL"
+                    th:field="*{photoURL}"
+                    name="photoURL"
+                    placeholder="Photo URL">
+            <p th:if="${#fields.hasErrors('photoURL')}" class="text-danger" th:errors="*{photoURL}"></p>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="content">Content</label>
+          <input
+                  type="text"
+                  class="form-control"
+                  id="content"
+                  th:field="*{content}"
+                  name="content"
+                  placeholder="Content">
+          <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </section>
+</main>
+</body>
+</html>
