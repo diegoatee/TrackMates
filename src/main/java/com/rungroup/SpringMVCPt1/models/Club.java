@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 //The below 4 annotations are lombok
 @Data //Generates all getters, setters, toString(), equals(), and hashCode()
@@ -30,4 +32,9 @@ public class Club {
     private LocalDateTime createdOn;
     @UpdateTimestamp
     private LocalDateTime updatedOn;
+
+    //CascadeType.REMOVE: When the parent is removed, it's going to remove the children.
+    //The "club" will be declared in the Event class. The "mappedBy" parameter represents the club attribute in the Event class.
+    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE)
+    private Set<Event> events = new HashSet<>();
 }
