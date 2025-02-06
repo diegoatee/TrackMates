@@ -25,6 +25,7 @@
               <p class="fs-5 mb-4" th:text="${club.content}"></p>
               <!--Add a delete button for admins, hidden for users-->
               <a class="btn btn-primary" th:href="@{/clubs/{clubId}/delete(clubId=${club.id})}">Delete</a>
+              <a class="btn btn-primary" th:href="@{/events/{clubId}/new(clubId=${club.id})}">Create Event</a>
             </section>
             <!--Event Content-->
             <h2 class="fw-bolder mb-4 mt-5">Events</h2>
