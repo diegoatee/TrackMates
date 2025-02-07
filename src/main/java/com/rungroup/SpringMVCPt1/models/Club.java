@@ -9,7 +9,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 //The below 4 annotations are lombok
@@ -36,5 +38,5 @@ public class Club {
     //CascadeType.REMOVE: When the parent is removed, it's going to remove the children.
     //The "club" will be declared in the Event class. The "mappedBy" parameter represents the club attribute in the Event class.
     @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE)
-    private Set<Event> events = new HashSet<>();
+    private List<Event> events = new ArrayList<>();
 }

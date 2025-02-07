@@ -1,6 +1,7 @@
 package com.rungroup.SpringMVCPt1.service.impl;
 
 import com.rungroup.SpringMVCPt1.dto.EventDto;
+import com.rungroup.SpringMVCPt1.mapper.EventMapper;
 import com.rungroup.SpringMVCPt1.models.Club;
 import com.rungroup.SpringMVCPt1.models.Event;
 import com.rungroup.SpringMVCPt1.repository.ClubRepository;
@@ -8,6 +9,9 @@ import com.rungroup.SpringMVCPt1.repository.EventRepository;
 import com.rungroup.SpringMVCPt1.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -23,25 +27,16 @@ public class EventServiceImpl implements EventService {
     @Override
     public void createEvent(Long clubId, EventDto eventDto) {
         Club club = clubRepository.findById(clubId).get();
-        Event event = mapToEvent(eventDto);
+        Event event = EventMapper.mapToEvent(eventDto);
         event.setClub(club);
 
         eventRepository.save(event);
     }
 
-    private Event mapToEvent(EventDto eventDto) {
-        Event event = Event.builder()
-                        .id(eventDto.getId())
-                        .name(eventDto.getName())
-                        .startDate(eventDto.getStartDate())
-                        .endDate(eventDto.getEndDate())
-                        .type(eventDto.getType())
-                        .photoURL(eventDto.getPhotoURL())
-                        .createdOn(eventDto.getCreatedOn())
-                        .updatedOn(eventDto.getUpdatedOn())
-                        .club(null)
-                        .build();
+    @Override
+    public List<EventDto> findAllEvents() {
+        List<Event> events = eventRepository.findAll();
 
-        return event;
+        return events.stream().map((event) -> EventMapper.mapToEventDto(event)).collect(Collectors.toList());
     }
 }
