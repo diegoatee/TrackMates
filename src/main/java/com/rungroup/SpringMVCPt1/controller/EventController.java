@@ -34,6 +34,16 @@ public class EventController {
         return "events-list";
     }
 
+    //GET endpoint to display a specific event's details
+    @GetMapping("/events/{eventId}")
+    public String eventDetails(@PathVariable("eventId") Long eventId, Model model) {
+        EventDto eventDto = eventService.findEventById(eventId);
+        model.addAttribute("event", eventDto);
+
+        return "events-detail";
+    }
+
+    //GET endpoint to show a "create event" form to the user
     @GetMapping("/events/{clubId}/new")
     public String createEventForm(@PathVariable("clubId") Long clubId, Model model) {
         Event event = new Event();
@@ -44,8 +54,9 @@ public class EventController {
         return "events-create";
     }
 
+    //POST endpoint to save an event to the event table
     @PostMapping("events/{clubId}")
-    public String createEvent(@PathVariable("clubId") Long clubId, @ModelAttribute("event") EventDto eventDto, Model model) {
+    public String createEvent(@PathVariable("clubId") Long clubId, @ModelAttribute("event") EventDto eventDto) {
         eventService.createEvent(clubId, eventDto);
         return "redirect:/clubs/" + clubId;
     }

@@ -39,4 +39,11 @@ public class EventServiceImpl implements EventService {
 
         return events.stream().map((event) -> EventMapper.mapToEventDto(event)).collect(Collectors.toList());
     }
+
+    @Override
+    public EventDto findEventById(Long eventId) {
+        Event event = eventRepository.findById(eventId).get();
+
+        return EventMapper.mapToEventDto(event);
+    }
 }
