@@ -46,4 +46,10 @@ public class EventServiceImpl implements EventService {
 
         return EventMapper.mapToEventDto(event);
     }
+
+    @Override
+    public void updateEvent(EventDto eventDto) {
+        Event event = EventMapper.mapToEvent(eventDto);
+        eventRepository.save(event);
+    }
 }

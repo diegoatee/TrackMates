@@ -1,5 +1,6 @@
 package com.rungroup.SpringMVCPt1.dto;
 
+import com.rungroup.SpringMVCPt1.models.Club;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,12 +18,13 @@ import java.time.LocalDateTime;
 public class EventDto {
     private Long id;
     private String name;
-    //@DateTimeFormat(pattern = "yyyy-MM-dd'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime startDate;
-    //@DateTimeFormat(pattern = "yyyy-MM-dd'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endDate;
     private String type;
     private String photoURL;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+    private Club club;
 }
