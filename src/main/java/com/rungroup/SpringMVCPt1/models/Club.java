@@ -26,7 +26,7 @@ public class Club {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @Column(length = 20000) //Since URLs are long, and by default, 255 is too small
+    @Column(length = 20000)
     private String photoURL;
     @Column(length = 20000) //Since this might be about as long as your typical blog page
     private String content;
