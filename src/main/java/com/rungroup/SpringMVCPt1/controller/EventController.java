@@ -95,4 +95,12 @@ public class EventController {
 
         return "redirect:/events";
     }
+
+    //Create a GET endpoint that will delete an event by its id
+    @GetMapping("/events/{eventId}/delete")
+    public String removeEvent(@PathVariable("eventId") Long eventId) {
+        eventService.deleteEvent(eventId);
+
+        return "redirect:/events";
+    }
 }

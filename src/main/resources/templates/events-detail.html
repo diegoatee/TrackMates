@@ -24,8 +24,7 @@
             <h2 class="fw-bolder mb-4 mt-5">About Event</h2>
             <p class="fs-5 mb-4" th:text="${event.type}"></p>
             <!--Add a delete button for admins, hidden for users-->
-            <a class="btn btn-primary">Delete</a>
-            <a class="btn btn-primary">Edit</a>
+            <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete</a>
           </section>
         </article>
       </div>
