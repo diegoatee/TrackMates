@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body class="d-flex flex-column">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <!--Note: We keep the method as "post"-->
+            <form role="form" method="post" th:action="@{/register}" th:object="${user}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="username">Username</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="username"
+                                th:field="*{username}"
+                                name="username"
+                                placeholder="Username">
+                        <!--Here, th:if checks for errors, th:errors will print the error message for a given field if errors occurred, and class can determine the type of text-->
+                        <p th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}"></p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="email"
+                                th:field="*{email}"
+                                name="email"
+                                placeholder="Email">
+                        <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></p>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password">Password</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="password"
+                            th:field="*{password}"
+                            name="password"
+                            placeholder="Password">
+                    <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>
